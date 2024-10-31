@@ -1,6 +1,13 @@
-// App.js
-import React, { useState } from 'react';
-import { integrateRectangleMethod, integrateTrapezoidalMethod, func, intervals, analyticValue } from '../utils/methods';
+import { useState } from "react";
+import {
+  integrateRectangleMethod,
+  integrateTrapezoidalMethod,
+  integrateMonteCarloMethod,
+  func,
+  intervals,
+  analyticValue,
+} from "../utils/methods";
+import calculatorIcon from "../icon/free-icon-computer-science-3581229.png";
 
 const App = () => {
   const [results, setResults] = useState([]);
@@ -11,41 +18,48 @@ const App = () => {
     const calculations = intervals.map((n) => {
       const rectangleResult = integrateRectangleMethod(func, a, b, n);
       const trapezoidalResult = integrateTrapezoidalMethod(func, a, b, n);
-      return { 
-        n, 
-        analyticValue, 
-        rectangleMethod: rectangleResult, 
-        trapezoidalMethod: trapezoidalResult 
+      const monteCarloResult = integrateMonteCarloMethod(func, a, b, n);
+      return {
+        n,
+        analyticValue,
+        rectangleMethod: rectangleResult,
+        trapezoidalMethod: trapezoidalResult,
+        monteCarloMethod: monteCarloResult,
       };
     });
     setResults(calculations);
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Числові методи обчислення інтегралів</h1>
+    <div style={{ padding: "20px" }}>
+      <h1>
+        Числові методи обчислення інтегралів
+        <img
+          src={calculatorIcon}
+          alt="Calculator Icon"
+          style={{ width: "30px", marginRight: "10px" }}
+        />
+      </h1>
 
       <p>
-        Обчислити визначений інтеграл <strong>∫ x² cos(x) dx</strong> на інтервалі від 
-        <strong> 0.6 до 1.4</strong> чисельно методами прямокутників і трапецій для 
-        п'яти значень <strong>N</strong>: <strong> N = 10, 20, 50, 100, 1000</strong>.
+        Обчислити визначений інтеграл <strong>∫ x² cos(x) dx</strong>
       </p>
 
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: "10px" }}>
         <label>
-          Нижня межа (a): 
-          <input 
-            type="number" 
-            value={a} 
-            onChange={(e) => setA(parseFloat(e.target.value))} 
+          Нижня межа (a):
+          <input
+            type="number"
+            value={a}
+            onChange={(e) => setA(parseFloat(e.target.value))}
           />
         </label>
-        <label style={{ marginLeft: '10px' }}>
-          Верхня межа (b): 
-          <input 
-            type="number" 
-            value={b} 
-            onChange={(e) => setB(parseFloat(e.target.value))} 
+        <label style={{ marginLeft: "10px" }}>
+          Верхня межа (b):
+          <input
+            type="number"
+            value={b}
+            onChange={(e) => setB(parseFloat(e.target.value))}
           />
         </label>
       </div>
@@ -53,13 +67,22 @@ const App = () => {
       <button onClick={calculateIntegrals}>Обчислити</button>
 
       {results.length > 0 && (
-        <table style={{ marginTop: '20px', width: '100%', borderCollapse: 'collapse' }}>
+        <table
+          style={{
+            marginTop: "20px",
+            width: "100%",
+            borderCollapse: "collapse",
+            textAlign: "center",
+            border: "1px solid #ddd",
+          }}
+        >
           <thead>
             <tr>
               <th>N</th>
               <th>Аналітичне значення</th>
               <th>Метод прямокутників</th>
               <th>Метод трапецій</th>
+              <th>Метод Монте-Карло</th>
             </tr>
           </thead>
           <tbody>
@@ -69,6 +92,7 @@ const App = () => {
                 <td>{row.analyticValue.toFixed(6)}</td>
                 <td>{row.rectangleMethod.toFixed(6)}</td>
                 <td>{row.trapezoidalMethod.toFixed(6)}</td>
+                <td>{row.monteCarloMethod.toFixed(6)}</td>
               </tr>
             ))}
           </tbody>

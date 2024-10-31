@@ -28,3 +28,13 @@ export function integrateTrapezoidalMethod(func, a, b, n) {
   return sum * h;
 }
 
+export function integrateMonteCarloMethod(func, a, b, n) {
+  let sum = 0;
+
+  for (let i = 0; i < n; i++) {
+    const x = a + Math.random() * (b - a);  // випадкова точка в межах [a, b]
+    sum += func(x);
+  }
+
+  return ((b - a) / n) * sum;
+}
