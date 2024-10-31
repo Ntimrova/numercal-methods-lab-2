@@ -1,5 +1,5 @@
 export const func = (x) => Math.pow(x, 2) * Math.cos(x);
-export const intervals = [10, 20, 50, 100, 1000, 100000000];
+export const intervals = [ 10, 20, 50, 100, 1000, 100000000];
 
 
 export const analyticValue = 0.372101;

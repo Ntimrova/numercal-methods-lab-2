@@ -8,6 +8,8 @@ import {
   analyticValue,
 } from "../utils/methods";
 import calculatorIcon from "../icon/free-icon-computer-science-3581229.png";
+import styles from "../styles/App.module.css"; 
+import Graph from "./Graph";
 
 const App = () => {
   const [results, setResults] = useState([]);
@@ -31,22 +33,19 @@ const App = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>
         Числові методи обчислення інтегралів
-        <img
-          src={calculatorIcon}
-          alt="Calculator Icon"
-          style={{ width: "30px", marginRight: "10px" }}
-        />
+        <img src={calculatorIcon} alt="Calculator Icon" className={styles.icon} />
       </h1>
 
-      <p>
+      <p className={styles.subtitle}>
         Обчислити визначений інтеграл <strong>∫ x² cos(x) dx</strong>
       </p>
+      <Graph func={func} a={a} b={b} />
 
-      <div style={{ marginBottom: "10px" }}>
-        <label>
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>
           Нижня межа (a):
           <input
             type="number"
@@ -54,7 +53,7 @@ const App = () => {
             onChange={(e) => setA(parseFloat(e.target.value))}
           />
         </label>
-        <label style={{ marginLeft: "10px" }}>
+        <label className={styles.label}>
           Верхня межа (b):
           <input
             type="number"
@@ -63,19 +62,11 @@ const App = () => {
           />
         </label>
       </div>
-
-      <button onClick={calculateIntegrals}>Обчислити</button>
+      
+      <button onClick={calculateIntegrals} className={styles.button}>Обчислити</button> 
 
       {results.length > 0 && (
-        <table
-          style={{
-            marginTop: "20px",
-            width: "100%",
-            borderCollapse: "collapse",
-            textAlign: "center",
-            border: "1px solid #ddd",
-          }}
-        >
+        <table className={styles.table}>
           <thead>
             <tr>
               <th>N</th>
@@ -98,6 +89,7 @@ const App = () => {
           </tbody>
         </table>
       )}
+      
     </div>
   );
 };
