@@ -24,7 +24,7 @@ const App = () => {
       const rectangleResult = integrateRectangleMethod(func, a, b, n);
       const trapezoidalResult = integrateTrapezoidalMethod(func, a, b, n);
       const monteCarloResult = integrateMonteCarloMethod(func, a, b, n);
-      return {
+      return { 
         n,
         analyticValue,
         rectangleMethod: rectangleResult,
