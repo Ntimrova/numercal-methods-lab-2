@@ -16,6 +16,8 @@ const App = () => {
   const [a, setA] = useState(0.6);
   const [b, setB] = useState(1.4);
 
+  
+
   const calculateIntegrals = () => {
     const calculations = intervals.map((n) => {
       const rectangleResult = integrateRectangleMethod(func, a, b, n);
@@ -42,7 +44,12 @@ const App = () => {
       <p className={styles.subtitle}>
         Обчислити визначений інтеграл <strong>∫ x² cos(x) dx</strong>
       </p>
-      <Graph func={func} a={a} b={b} />
+      
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Graph func={func} a={a} b={b}  method="rectangle" />
+        <Graph func={func} a={a} b={b}  method="trapezoidal" />
+        <Graph func={func} a={a} b={b}  method="monteCarlo" />
+      </div>
 
       <div className={styles.inputGroup}>
         <label className={styles.label}>
@@ -61,9 +68,10 @@ const App = () => {
             onChange={(e) => setB(parseFloat(e.target.value))}
           />
         </label>
+        <button onClick={calculateIntegrals} className={styles.button}>Обчислити</button> 
       </div>
       
-      <button onClick={calculateIntegrals} className={styles.button}>Обчислити</button> 
+     
 
       {results.length > 0 && (
         <table className={styles.table}>
