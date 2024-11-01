@@ -1,8 +1,10 @@
 export const func = (x) => Math.pow(x, 2) * Math.cos(x);
+export const func2 = (x) => 1 / Math.sqrt(0.5 * x + 1);
 export const intervals = [ 10, 20, 50, 100, 1000, 100000000];
 
 
 export const analyticValue = 0.372101;
+export const analyticValue2 = 0.478397;
 
 export function integrateRectangleMethod(func, a, b, n) {
   const h = (b - a) / n;
@@ -53,7 +55,3 @@ export function integrateMonteCarloMethod(func, a, b, n) {
   return ((b - a) / n) * sum;
 }
 
-// Ця функція обчислює інтеграл за методом трапецій:
-// Спочатку обчислює суму з половиною значення функції на краях інтервалу.
-// Додає значення функції в інших точках інтервалу.
-// Повертає значення інтегралу як sum * h.

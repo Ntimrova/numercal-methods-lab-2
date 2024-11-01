@@ -11,6 +11,7 @@ import calculatorIcon from "../icon/free-icon-computer-science-3581229.png";
 import styles from "../styles/App.module.css"; 
 import Graph from "./Graph";
 
+
 const App = () => {
   const [results, setResults] = useState([]);
   const [a, setA] = useState(0.6);
@@ -98,6 +99,7 @@ const App = () => {
         </table>
       )}
       
+    
     </div>
   );
 };
